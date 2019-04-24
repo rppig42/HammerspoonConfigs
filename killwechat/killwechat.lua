@@ -1,3 +1,6 @@
+-- 系统待机时注销Mac微信，这样手机微信可以收到提醒
+-- 正常来说，直接杀掉微信进程即可，但貌似因为我装了微信访撤回插件的原因，直接杀掉进程并不会让Mac微信下线
+
 script = [[
     tell application "WeChat" to activate
 

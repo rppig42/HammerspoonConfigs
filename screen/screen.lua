@@ -1,3 +1,5 @@
+-- 一键切换Mac主屏幕，并将所有的窗口移到主屏幕上去
+
 local menubar = hs.menubar.new()
 local selectedMenuName = ''
 local menuData = {}
@@ -14,6 +16,7 @@ function renderMenus()
                 selectedMenuName = v:name()
                 renderMenus()
                 v:setPrimary()
+                -- 如果不需要移动窗口，可以注释moveWindows函数
                 moveWindows()
             end
         })
