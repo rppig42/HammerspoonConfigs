@@ -1,5 +1,4 @@
 -- 一键切换Mac主屏幕，并将所有的窗口移到主屏幕上去
-
 local menubar = hs.menubar.new()
 local selectedMenuName = ''
 local menuData = {}
@@ -7,8 +6,7 @@ local menuData = {}
 function renderMenus()
     menuData = {}
     local allScreens = hs.screen.allScreens()
-    for i,v in ipairs(allScreens)
-    do
+    for i, v in ipairs(allScreens) do
         table.insert(menuData, {
             title = v:name(),
             checked = v:name() == selectedMenuName,
@@ -21,6 +19,18 @@ function renderMenus()
             end
         })
     end
+
+    table.insert(menuData, {
+        title = '🌘',
+        fn = function()
+            for i, v in ipairs(allScreens) do
+                if v:name() == 'Color LCD' then
+                    v:setBrightness(1 - v:getBrightness())
+                end
+            end
+        end
+    })
+
     menubar:setTitle('🖥')
     menubar:setTooltip('Set as primary screen')
     menubar:setMenu(menuData)
@@ -30,18 +40,12 @@ function moveWindows()
     local allWindows = hs.window.visibleWindows()
     local primaryScreen = hs.screen.primaryScreen()
 
-    for i,window in ipairs(allWindows)
-    do
-        window:moveToScreen(primaryScreen)
-    end
+    for i, window in ipairs(allWindows) do window:moveToScreen(primaryScreen) end
 
 end
-
 
 local screenwatcher = hs.screen.watcher.new(renderMenus)
 screenwatcher:start()
 
 renderMenus()
-
-
 
