@@ -25,7 +25,7 @@ function renderMenus()
         fn = function()
             for i, v in ipairs(allScreens) do
                 if v:name() == 'Color LCD' then
-                    v:setBrightness(math.ceil(1 - v:getBrightness()))
+                    v:setBrightness(1 - math.ceil(v:getBrightness()))
                 end
             end
         end
